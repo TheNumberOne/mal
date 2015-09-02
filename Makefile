@@ -70,7 +70,7 @@ forth_STEP_TO_PROG =   forth/$($(1)).fs
 fsharp_STEP_TO_PROG =  fsharp/$($(1)).exe
 go_STEP_TO_PROG =      go/$($(1))
 groovy_STEP_TO_PROG =  groovy/$($(1)).groovy
-java_STEP_TO_PROG =    java/src/main/java/mal/$($(1)).java
+java_STEP_TO_PROG =    java/build/classes/main/$($(1)).class
 haskell_STEP_TO_PROG = haskell/$($(1))
 julia_STEP_TO_PROG =   julia/$($(1)).jl
 js_STEP_TO_PROG =      js/$($(1)).js
@@ -117,7 +117,7 @@ fsharp_RUNSTEP =  mono ../$(2) --raw $(3)
 go_RUNSTEP =      ../$(2) $(3)
 groovy_RUNSTEP =  groovy ../$(2) $(3)
 haskell_RUNSTEP = ../$(2) $(3)
-java_RUNSTEP =    mvn -quiet exec:java -Dexec.mainClass="mal.$($(1))" $(if $(3), -Dexec.args="$(3)",)
+java_RUNSTEP =    java -cp ../$(dir $(2)) $(notdir $(basename $2)) $(3)
 julia_RUNSTEP =   ../$(2) $(3)
 js_RUNSTEP =      node ../$(2) $(3)
 lua_RUNSTEP =     ../$(2) $(3)

@@ -38,7 +38,7 @@ parser.add_argument('mal_cmd', nargs="*",
 
 class Runner():
     def __init__(self, args, no_pty=False):
-        #print "args: %s" % repr(args)
+        # print "args: %s" % repr(args)
         self.no_pty = no_pty
 
         # Cleanup child process on exit
