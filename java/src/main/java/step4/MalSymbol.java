@@ -1,10 +1,10 @@
-package step2;
+package step4;
 
 /**
  * Created by TheNumberOne on 9/1/15.
  */
 public class MalSymbol extends MalObject {
-    private final String name;
+    public final String name;
 
     public MalSymbol(String name) {
         this.name = name;
@@ -20,7 +20,7 @@ public class MalSymbol extends MalObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MalSymbol malSymbol = (MalSymbol) o;
+        step3.MalSymbol malSymbol = (step3.MalSymbol) o;
 
         return name.equals(malSymbol.name);
 

@@ -1,4 +1,4 @@
-package step2;
+package step4;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class Reader {
         return peek().equals(token);
     }
 
-    public static MalObject read_str(String string){
+    public static step4.MalObject read_str(String string){
         List<String> tokens = tokenizer(string);
         return new Reader(tokens).read_form();
     }
@@ -65,7 +65,7 @@ public class Reader {
         return tokens;
     }
 
-    private MalObject read_form() {
+    private step4.MalObject read_form() {
         char c = peek().charAt(0);
         if (hit_end()){
             throw new IllegalArgumentException("");
@@ -92,57 +92,57 @@ public class Reader {
         }
     }
 
-    private MalObject read_map() {
-        HashMap<MalObject, MalObject> map = new HashMap<>();
+    private step4.MalObject read_map() {
+        HashMap<step4.MalObject, step4.MalObject> map = new HashMap<>();
         while (!isNext("}")) {
-            MalObject key = read_form();
-            MalObject value = read_form();
+            step4.MalObject key = read_form();
+            step4.MalObject value = read_form();
             map.put(key, value);
         }
         next();
-        return new MalMap(map);
+        return new step4.MalMap(map);
     }
 
-    private MalObject read_keyword() {
+    private step4.MalObject read_keyword() {
         String k = next();
         return new MalKeyword(k.substring(1));
     }
 
-    private MalObject read_string() {
+    private step4.MalObject read_string() {
         String s = next();
         s = s.substring(1, s.length() - 1);
-        return new MalString(s.replace("\\\"", "\"").replace("\\n", "\n"));
+        return new step4.MalString(s.replace("\\\"", "\"").replace("\\n", "\n"));
     }
 
-    private MalObject read_vector() {
-        List<MalObject> list = new ArrayList<>();
+    private step4.MalObject read_vector() {
+        List<step4.MalObject> list = new ArrayList<>();
         while (!isNext("]")) {
             list.add(read_form());
         }
         next();
-        return new MalVector(list);
+        return new step4.MalVector(list);
     }
 
-    private MalList read_list() {
-        List<MalObject> list = new ArrayList<>();
+    private step4.MalList read_list() {
+        List<step4.MalObject> list = new ArrayList<>();
         while (!isNext(")")) {
             list.add(read_form());
         }
         next();
-        return new MalList(list);
+        return new step4.MalList(list);
     }
 
-    private MalObject read_atom() {
+    private step4.MalObject read_atom() {
         String code = next();
         if (intRE.matcher(code).matches()){
-            return new MalInt(new BigInteger(code));
+            return new step4.MalInt(new BigInteger(code));
         } else if (boolRE.matcher(code).matches()){
-            return new MalBool(Boolean.parseBoolean(code));
+            return new step4.MalBool(Boolean.parseBoolean(code));
         } else if (nilRE.matcher(code).matches()){
-            return MalNil.nil;
+            return step4.MalNil.nil;
         }
         else {
-            return new MalSymbol(code);
+            return new step4.MalSymbol(code);
         }
     }
 }
